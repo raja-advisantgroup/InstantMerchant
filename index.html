@@ -1,0 +1,573 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>API Reference</title>
+
+    <style>
+      .highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight, .highlight .w {
+  color: #f8f8f2;
+  background-color: #272822;
+}
+.highlight .err {
+  color: #151515;
+  background-color: #ac4142;
+}
+.highlight .c, .highlight .cd, .highlight .cm, .highlight .c1, .highlight .cs {
+  color: #505050;
+}
+.highlight .cp {
+  color: #f4bf75;
+}
+.highlight .nt {
+  color: #f4bf75;
+}
+.highlight .o, .highlight .ow {
+  color: #d0d0d0;
+}
+.highlight .p, .highlight .pi {
+  color: #d0d0d0;
+}
+.highlight .gi {
+  color: #90a959;
+}
+.highlight .gd {
+  color: #ac4142;
+}
+.highlight .gh {
+  color: #6a9fb5;
+  background-color: #151515;
+  font-weight: bold;
+}
+.highlight .k, .highlight .kn, .highlight .kp, .highlight .kr, .highlight .kv {
+  color: #aa759f;
+}
+.highlight .kc {
+  color: #d28445;
+}
+.highlight .kt {
+  color: #d28445;
+}
+.highlight .kd {
+  color: #d28445;
+}
+.highlight .s, .highlight .sb, .highlight .sc, .highlight .sd, .highlight .s2, .highlight .sh, .highlight .sx, .highlight .s1 {
+  color: #90a959;
+}
+.highlight .sr {
+  color: #75b5aa;
+}
+.highlight .si {
+  color: #8f5536;
+}
+.highlight .se {
+  color: #8f5536;
+}
+.highlight .nn {
+  color: #f4bf75;
+}
+.highlight .nc {
+  color: #f4bf75;
+}
+.highlight .no {
+  color: #f4bf75;
+}
+.highlight .na {
+  color: #6a9fb5;
+}
+.highlight .m, .highlight .mf, .highlight .mh, .highlight .mi, .highlight .il, .highlight .mo, .highlight .mb, .highlight .mx {
+  color: #90a959;
+}
+.highlight .ss {
+  color: #90a959;
+}
+    </style>
+    <link href="stylesheets/screen.css" rel="stylesheet" media="screen" />
+    <link href="stylesheets/print.css" rel="stylesheet" media="print" />
+      <script src="javascripts/all.js"></script>
+  </head>
+
+  <body class="index" data-languages="[&quot;shell&quot;]">
+    <a href="#" id="nav-button">
+      <span>
+        <!-- NAV -->
+        <img src="http://instantmerchant.io/wp-content/uploads/2015/10/IM-Logo-Alt-Reverse@2x.png" />
+      </span>
+    </a>
+    <div class="tocify-wrapper">
+      
+        <div class="lang-selector">
+              <a href="#" data-language-name="shell">cURL</a>
+        </div>
+        <div class="search">
+          <input type="text" class="search" id="input-search" placeholder="Search">
+        </div>
+        <ul class="search-results"></ul>
+      <div id="toc">
+      <div class="menu-title1">API</div>
+      </div>
+        <ul class="toc-footer">
+            <li><a href='https://support.instantmerchant.io/'>Get Support</a></li>
+        </ul>
+    </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        <h1 id="introduction">Introduction</h1>
+
+<p>Welcome to the InstantMerchant API! You can use our API to access InstantMerchant payment endpoints, which you can use to develop mobile app or website that allow you to process payments.</p>
+
+<p>We have language bindings in curl. You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.</p>
+
+<h1 id="authentication">Authentication</h1>
+
+<blockquote>
+<p>To authorize, use this code:</p>
+</blockquote>
+<pre class="highlight shell"><code><span class="c"># With curl, you can just pass the correct header with each request</span>
+curl <span class="s2">"api_endpoint_here"</span>
+  -H <span class="s2">"X-Api-Key: meowmeowmeow"</span>
+  -H <span class="s2">"X-Api-Secret: meowmeowmeow"</span>
+</code></pre>
+
+<blockquote>
+<p>Make sure to replace <code class="prettyprint">meowmeowmeow</code> with your API key and API secret.</p>
+</blockquote>
+
+<p>InstantMerchant uses API key/secret pair to allow access to the API. You can get a new InstantMerchant API key at <a href="mailto:support@instantmerchant.io">developer support</a>.</p>
+
+<p>InstantMerchant expects for the API key / secret to be included in all API requests to the server in a header that looks like the following:</p>
+
+<p><code class="prettyprint">X-Api-Key: meowmeowmeow</code>
+<code class="prettyprint">X-Api-Secret: meowmeowmeow</code></p>
+
+<aside class="notice">
+You must replace <code>meowmeowmeow</code> with your personal API key and API secret.
+</aside>
+
+<h1 id="invoice">Invoice</h1>
+
+<h2 id="create-invoice">Create Invoice</h2>
+<pre class="highlight shell"><code>curl https://api.instantmerchant.io/api/v2/invoice <span class="se">\</span>
+  -H <span class="s2">"X-Api-Key: meowmeowmeow"</span> <span class="se">\</span>
+  -H <span class="s2">"X-Api-Secret: meowmeowmeow"</span> <span class="se">\</span>
+  -d <span class="nv">customer</span><span class="o">=</span>1 <span class="se">\</span>
+  -d <span class="nv">description</span><span class="o">=</span><span class="s1">'test description'</span> <span class="se">\</span>
+  -d <span class="nv">date_due</span><span class="o">=</span><span class="s1">'08/12/2017'</span> <span class="se">\</span>
+  -d <span class="nv">payment_type</span><span class="o">=</span><span class="s1">'one_time'</span> <span class="se">\</span>
+  -d items[]<span class="o">=</span><span class="s1">'apple'</span> <span class="se">\</span>
+  -d items_price[]<span class="o">=</span>20 <span class="se">\</span>
+  -d items[]<span class="o">=</span><span class="s1">'orange'</span> <span class="se">\</span>
+  -d items_price[]<span class="o">=</span>18 <span class="se">\</span>
+  -d <span class="nv">send_email</span><span class="o">=</span>1 <span class="se">\</span>
+  -d <span class="nv">pay_now</span><span class="o">=</span>yes <span class="se">\</span>
+  -d <span class="nv">cardholder_name</span><span class="o">=</span><span class="s1">'Jim'</span> <span class="se">\</span>
+  -d <span class="nv">card_number</span><span class="o">=</span>4242424242424242 <span class="se">\</span>
+  -d <span class="nv">exp_month</span><span class="o">=</span>12 <span class="se">\</span>
+  -d <span class="nv">exp_year</span><span class="o">=</span>2017 <span class="se">\</span>
+  -d <span class="nv">cvc</span><span class="o">=</span>123
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"status"</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"message"</span><span class="p">:</span><span class="s2">"invoice created successfully"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"data"</span><span class="p">:</span><span class="s2">"18gd5UB0o5NJGO1rgAoygmCU"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+
+<p>This endpoint creates invoice and optionally charges it immediately.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">POST https://api.instantmerchant.io/api/v2/invoice</code></p>
+
+<h3 id="query-parameters">Query Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>customer [required]</td>
+<td>none</td>
+<td>customer id if created already</td>
+</tr>
+<tr>
+<td>description [required]</td>
+<td>none</td>
+<td>payment description</td>
+</tr>
+<tr>
+<td>date_due [required]</td>
+<td>none</td>
+<td>invoice due date in format mm/dd/yyyy</td>
+</tr>
+<tr>
+<td>payment_type [required]</td>
+<td>none</td>
+<td>only allowed payment type is &lsquo;one_time&rsquo;</td>
+</tr>
+<tr>
+<td>items[] [required]</td>
+<td>none</td>
+<td>item name</td>
+</tr>
+<tr>
+<td>items_price[] [required]</td>
+<td>none</td>
+<td>Item price</td>
+</tr>
+<tr>
+<td>send_now [optional]</td>
+<td>0</td>
+<td>if set to 1, customer will receive invoice email</td>
+</tr>
+<tr>
+<td>pay_now [optional]</td>
+<td>no</td>
+<td>if set to yes, given credit card will be charged immediately</td>
+</tr>
+<tr>
+<td>cardholder_name [optional]</td>
+<td>none</td>
+<td>actual cardholder name</td>
+</tr>
+<tr>
+<td>card_number [optional]</td>
+<td>none</td>
+<td>the card number, as a string without any separators.</td>
+</tr>
+<tr>
+<td>exp_month [optional]</td>
+<td>none</td>
+<td>two digit number representing the card&rsquo;s expiration month.</td>
+</tr>
+<tr>
+<td>exp_year [optional]</td>
+<td>none</td>
+<td>two or four digit number representing the card&rsquo;s expiration year.</td>
+</tr>
+<tr>
+<td>cvc [optional]</td>
+<td>none</td>
+<td>Card security code.</td>
+</tr>
+<tr>
+<td>currency [optional]</td>
+<td>usd</td>
+<td>only allowed currency is usd.</td>
+</tr>
+</tbody></table>
+
+<h2 id="send-invoice">Send Invoice</h2>
+<pre class="highlight shell"><code>curl https://api.instantmerchant.io/api/v2/invoice/send <span class="se">\</span>
+  -H <span class="s2">"X-Api-Key: meowmeowmeow"</span> <span class="se">\</span>
+  -H <span class="s2">"X-Api-Secret: meowmeowmeow"</span> <span class="se">\</span>
+  -d <span class="nv">invoice_num</span><span class="o">=</span>10
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"status"</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"message"</span><span class="p">:</span><span class="s2">"Invoice notification sent successfully"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+
+<p>This endpoint allows you to email the invoice to customer.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">POST https://api.instantmerchant.io/api/v2/invoice/send</code></p>
+
+<h3 id="query-parameters">Query Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>invoice_num [required]</td>
+<td>none</td>
+<td>the identifier of the invoice</td>
+</tr>
+</tbody></table>
+
+<h2 id="charge-invoice">Charge Invoice</h2>
+<pre class="highlight shell"><code>curl https://api.instantmerchant.io/api/v2/invoice/refund <span class="se">\</span>
+  -H <span class="s2">"X-Api-Key: meowmeowmeow"</span> <span class="se">\</span>
+  -H <span class="s2">"X-Api-Secret: meowmeowmeow"</span> <span class="se">\</span>
+  -d <span class="nv">charge_id</span><span class="o">=</span><span class="s1">'1gd5UB0o5NJGO1rgAoygm'</span> <span class="se">\</span>
+  -d <span class="nv">amount</span><span class="o">=</span>10
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"status"</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"message"</span><span class="p">:</span><span class="s2">"payment processed successfully"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"data"</span><span class="p">:</span><span class="s2">"8ac9l0o54KJGsDhK3gmCU"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+
+<p>This endpoint allow you to charge a credit or a debit card against an invoice, that has previously been created but not yet paid.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">POST https://api.instantmerchant.io/api/v2/invoice/refund</code></p>
+
+<h3 id="query-parameters">Query Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>invoice_num [required]</td>
+<td>none</td>
+<td>the id of the invoice to charge</td>
+</tr>
+<tr>
+<td>send_now [optional]</td>
+<td>0</td>
+<td>if set to 1, customer will receive invoice email</td>
+</tr>
+<tr>
+<td>cardholder_name [optional]</td>
+<td>none</td>
+<td>actual cardholder name</td>
+</tr>
+<tr>
+<td>card_number [optional]</td>
+<td>none</td>
+<td>the card number, as a string without any separators.</td>
+</tr>
+<tr>
+<td>exp_month [optional]</td>
+<td>none</td>
+<td>two digit number representing the card&rsquo;s expiration month.</td>
+</tr>
+<tr>
+<td>exp_year [optional]</td>
+<td>none</td>
+<td>two or four digit number representing the card&rsquo;s expiration year.</td>
+</tr>
+<tr>
+<td>cvc [optional]</td>
+<td>none</td>
+<td>Card security code.</td>
+</tr>
+<tr>
+<td>currency [optional]</td>
+<td>usd</td>
+<td>only allowed currency is usd.</td>
+</tr>
+</tbody></table>
+
+<h2 id="refund">Refund</h2>
+<pre class="highlight shell"><code>curl https://api.instantmerchant.io/api/v2/invoice/refund <span class="se">\</span>
+  -H <span class="s2">"X-Api-Key: meowmeowmeow"</span> <span class="se">\</span>
+  -H <span class="s2">"X-Api-Secret: meowmeowmeow"</span> <span class="se">\</span>
+  -d <span class="nv">charge_id</span><span class="o">=</span><span class="s1">'1gd5UB0o5NJGO1rgAoygm'</span> <span class="se">\</span>
+  -d <span class="nv">amount</span><span class="o">=</span>10
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"status"</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"message"</span><span class="p">:</span><span class="s2">"Refund has been initiated successfully"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"data"</span><span class="p">:</span><span class="s2">"8ac9l0o54KJGsDhK3gmCU"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+
+<p>This endpoint allow you to refund a charge that has previously been created but not yet refunded. Funds will be refunded to the credit or debit card that was originally charged. The fees you were originally charged are also refunded.</p>
+
+<p>You can optionally refund only part of a charge. You can do so as many times as you wish until the entire charge has been refunded.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">POST https://api.instantmerchant.io/api/v2/invoice/refund</code></p>
+
+<h3 id="query-parameters">Query Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>charge_id [required]</td>
+<td>none</td>
+<td>the transaction id of the charge to refund</td>
+</tr>
+<tr>
+<td>amount [optional]</td>
+<td>entire charge</td>
+<td>A positive integer representing how much of this charge to refund. Can only refund up to the unrefunded amount remaining of the charge.</td>
+</tr>
+</tbody></table>
+
+<h1 id="customer">Customer</h1>
+
+<h2 id="create-customer">Create Customer</h2>
+<pre class="highlight shell"><code>curl https://api.instantmerchant.io/api/v2/customer <span class="se">\</span>
+  -H <span class="s2">"X-Api-Key: meowmeowmeow"</span> <span class="se">\</span>
+  -H <span class="s2">"X-Api-Secret: meowmeowmeow"</span> <span class="se">\</span>
+  -d <span class="nv">name</span><span class="o">=</span><span class="s1">'Jim'</span> <span class="se">\</span>
+  -d <span class="nv">username</span><span class="o">=</span><span class="s1">'jim123'</span> <span class="se">\</span>
+  -d <span class="nv">email</span><span class="o">=</span><span class="s1">'jim@instantmerchant.io'</span> <span class="se">\</span>
+  -d <span class="nv">address</span><span class="o">=</span><span class="s1">'my address here'</span> <span class="se">\</span>
+  -d <span class="nv">city</span><span class="o">=</span><span class="s1">'nashville'</span> <span class="se">\</span>
+  -d <span class="nv">zip</span><span class="o">=</span>37251 <span class="se">\</span>
+  -d <span class="nv">state</span><span class="o">=</span><span class="s1">'TN'</span> <span class="se">\</span>
+  -d <span class="nv">country</span><span class="o">=</span><span class="s1">'US'</span>
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"status"</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"message"</span><span class="p">:</span><span class="s2">"Customer created successfully"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"data"</span><span class="p">:</span><span class="mi">23</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+
+<p>This endpoint allows you to create your customers.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">POST https://api.instantmerchant.io/api/v2/customer</code></p>
+
+<h3 id="query-parameters">Query Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name [required]</td>
+<td>none</td>
+<td>customer name</td>
+</tr>
+<tr>
+<td>email [required]</td>
+<td>none</td>
+<td>customer email address</td>
+</tr>
+<tr>
+<td>username [required]</td>
+<td>none</td>
+<td>unique username</td>
+</tr>
+<tr>
+<td>address [required]</td>
+<td>none</td>
+<td>customer address</td>
+</tr>
+<tr>
+<td>city [required]</td>
+<td>none</td>
+<td>city/suburb/town/village</td>
+</tr>
+<tr>
+<td>zip [required]</td>
+<td>none</td>
+<td>zip code or postal code</td>
+</tr>
+<tr>
+<td>state [required]</td>
+<td>none</td>
+<td>2-letter state code</td>
+</tr>
+<tr>
+<td>country [required]</td>
+<td>none</td>
+<td>2-letter country code</td>
+</tr>
+</tbody></table>
+
+          <h1 id="errors">Errors</h1>
+
+<p>The InstantMerchant API uses the following error codes:</p>
+
+<table><thead>
+<tr>
+<th>Error Code</th>
+<th>Meaning</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>400</td>
+<td>Bad Request &ndash; Your request is not valid</td>
+</tr>
+<tr>
+<td>401</td>
+<td>Unauthorized &ndash; Your API key / secret is wrong</td>
+</tr>
+<tr>
+<td>404</td>
+<td>Not Found &ndash; The specified endpoint could not be found</td>
+</tr>
+<tr>
+<td>405</td>
+<td>Method Not Allowed &ndash; You tried to access a InstantMerchant with an invalid method</td>
+</tr>
+<tr>
+<td>429</td>
+<td>Too Many Requests &ndash; You&rsquo;re requesting too many API calls! Slow down!</td>
+</tr>
+<tr>
+<td>500</td>
+<td>Internal Server Error &ndash; We had a problem with our server. Try again later.</td>
+</tr>
+<tr>
+<td>503</td>
+<td>Service Unavailable &ndash; We&rsquo;re temporarially offline for maintanance. Please try again later.</td>
+</tr>
+</tbody></table>
+
+      </div>
+      <div class="dark-box">
+          <div class="lang-selector">
+                <a href="#" data-language-name="shell">cURL</a>
+          </div>
+      </div>
+    </div>
+  </body>
+</html>
